@@ -3,11 +3,14 @@ package com.donnfelker.tasko;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.donnfelker.tasko.fragments.NewTaskFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +30,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        navigateToMainFragment();
+
+    }
+
+    private void navigateToMainFragment() {
+        MainFragment f = MainFragment.newInstance();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_content, f, MainFragment.class.getSimpleName())
+                .commit();
     }
 
     @Override
@@ -49,5 +62,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void navigateToNewTask(MenuItem item) {
+        NewTaskFragment f = NewTaskFragment.newInstance();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_content, f, NewTaskFragment.class.getSimpleName())
+                .addToBackStack(NewTaskFragment.class.getSimpleName())
+                .commit();
     }
 }

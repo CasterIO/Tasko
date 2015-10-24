@@ -3,8 +3,9 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/main_new_task"
+        android:id="@+id/menu_main_new_task"
         app:showAsAction="always"
-        android:title="@string/main_new"/>
+        android:title="@string/main_new"
+        android:onClick="navigateToNewTask"/>
 
 </menu>

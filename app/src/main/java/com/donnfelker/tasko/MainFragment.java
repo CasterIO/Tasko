@@ -1,7 +1,7 @@
 package com.donnfelker.tasko;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,14 +11,15 @@ import android.view.ViewGroup;
 
 import butterknife.Bind;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class MainFragment extends Fragment {
 
     @Bind(R.id.main_task_list) protected RecyclerView taskList;
 
     public MainFragment() {
+    }
+
+    public static MainFragment newInstance() {
+        return new MainFragment();
     }
 
     @Override
