@@ -1,16 +1,49 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:layout_marginStart="@dimen/activity_horizontal_margin"
-             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-             android:layout_marginTop="@dimen/activity_vertical_margin"
-             tools:context="com.donnfelker.tasko.fragments.NewTaskFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginEnd="@dimen/activity_horizontal_margin"
+              android:layout_marginStart="@dimen/activity_horizontal_margin"
+              android:layout_marginTop="@dimen/activity_vertical_margin"
+              android:orientation="vertical"
+              tools:context="com.donnfelker.tasko.fragments.NewTaskFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/new_task_task_name_input_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/new_task_task_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/new_task_task_name"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/new_task_task_desc_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/new_task_task_desc"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/new_task_task_description"
+            android:gravity="top"
+            android:singleLine="false"
+            android:lines="10"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/new_task_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/new_task_add"
+        />
+
+</LinearLayout>

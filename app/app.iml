@@ -96,9 +96,9 @@
     <orderEntry type="library" exported="" name="design-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="jsr250-api-1.0" level="project" />
+    <orderEntry type="library" exported="" name="dagger-2.0" level="project" />
     <orderEntry type="library" exported="" name="realm-android-0.84.0" level="project" />
     <orderEntry type="library" exported="" name="butterknife-7.0.1" level="project" />
-    <orderEntry type="library" exported="" name="dagger-2.0" level="project" />
     <orderEntry type="library" exported="" name="javax.inject-1" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.0.1" level="project" />
