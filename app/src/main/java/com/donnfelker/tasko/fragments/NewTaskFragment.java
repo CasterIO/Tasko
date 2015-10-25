@@ -44,13 +44,7 @@ public class NewTaskFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(getContext()).build();
-
-        // Clear the realm from last time
-        Realm.deleteRealm(realmConfiguration);
-
-        // Create a new empty instance of Realm
-        realm = Realm.getInstance(realmConfiguration);
+        realm = Realm.getDefaultInstance();
     }
 
     @Override
