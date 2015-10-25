@@ -66,7 +66,7 @@ public class NewTaskFragment extends BaseFragment {
             nameInputLayout.setErrorEnabled(true);
         }
 
-        realm = Realm.getInstance(getActivity());
+        realm = Realm.getDefaultInstance();
 
         realm.beginTransaction();
 

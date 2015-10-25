@@ -2,6 +2,7 @@ package com.donnfelker.tasko.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,12 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.donnfelker.tasko.R;
+import com.donnfelker.tasko.adapters.RealmTasksAdapter;
+import com.donnfelker.tasko.adapters.TaskAdapter;
+import com.donnfelker.tasko.models.Task;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class MainFragment extends Fragment {
 
-    @Bind(R.id.main_task_list) protected RecyclerView taskList;
+    @Bind(R.id.main_task_list) protected RecyclerView rv;
+
+    private Realm realm;
+    private TaskAdapter adapter;
 
     public MainFragment() {
     }
@@ -31,9 +41,34 @@ public class MainFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        realm = Realm.getDefaultInstance();
+
+        RealmResults<Task> tasks = realm.where(Task.class).findAll();
+        RealmTasksAdapter tasksAdapter = new RealmTasksAdapter(getContext(), tasks, true);
+
+        // set the data and tell the RecyclerView to draw
+        adapter.setRealmAdapter(tasksAdapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        realm.close();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        View v = inflater.inflate(R.layout.fragment_main, container, false);
+        ButterKnife.bind(this, v);
+        adapter = new TaskAdapter();
+        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rv.setAdapter(adapter);
+
+        return v;
     }
 
     @Override
