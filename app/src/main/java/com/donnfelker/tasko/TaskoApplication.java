@@ -15,7 +15,7 @@ public abstract class TaskoApplication extends Application {
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this)
                 .name("tasko.realm")
                 .build();
-        //Realm.deleteRealm(realmConfiguration); // Clean slate
+        Realm.deleteRealm(realmConfiguration); // Clean slate
         Realm.setDefaultConfiguration(realmConfiguration); // Make this Realm the default
     }
 }

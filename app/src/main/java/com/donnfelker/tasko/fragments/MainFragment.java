@@ -12,20 +12,20 @@ import android.view.ViewGroup;
 
 import com.donnfelker.tasko.R;
 import com.donnfelker.tasko.adapters.RealmTasksAdapter;
-import com.donnfelker.tasko.adapters.TaskAdapter;
 import com.donnfelker.tasko.models.Task;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
 public class MainFragment extends Fragment {
 
-    @Bind(R.id.main_task_list) protected RecyclerView rv;
+    @Bind(R.id.main_task_list) protected RealmRecyclerView rv;
 
     private Realm realm;
-    private TaskAdapter adapter;
+
 
     public MainFragment() {
     }
@@ -38,19 +38,16 @@ public class MainFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
+
+        realm = Realm.getDefaultInstance();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        realm = Realm.getDefaultInstance();
-
         RealmResults<Task> tasks = realm.where(Task.class).findAll();
-        RealmTasksAdapter tasksAdapter = new RealmTasksAdapter(getContext(), tasks, true);
-
-        // set the data and tell the RecyclerView to draw
-        adapter.setRealmAdapter(tasksAdapter);
-        adapter.notifyDataSetChanged();
+        RealmTasksAdapter tasksAdapter = new RealmTasksAdapter(getContext(), tasks, true, true);
+        rv.setAdapter(tasksAdapter);
     }
 
     @Override
@@ -64,10 +61,6 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, v);
-        adapter = new TaskAdapter();
-        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv.setAdapter(adapter);
-
         return v;
     }
 

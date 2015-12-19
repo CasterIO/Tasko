@@ -1,5 +1,6 @@
 package com.donnfelker.tasko;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,16 +18,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String id = getIntent().getStringExtra("person_id");
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        //fab.setRippleColor(getResources().getColor(R.color.ripple_color));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                navigateToNewTask();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
 
@@ -65,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void navigateToNewTask(MenuItem item) {
+        navigateToNewTask();
+    }
+
+    private void navigateToNewTask() {
         NewTaskFragment f = NewTaskFragment.newInstance();
         getSupportFragmentManager()
                 .beginTransaction()

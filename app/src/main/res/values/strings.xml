@@ -9,4 +9,5 @@
     <string name="new_task_task_description">Task Description</string>
     <string name="new_task_add">Add</string>
     <string name="error_new_task_name_required">Task name is required</string>
+    <string name="task_list_no_tasks_found">No Tasks Found! Please create one.</string>
 </resources>
