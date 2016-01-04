@@ -19,5 +19,4 @@
         app:rrvEmptyLayoutId="@layout/empty_view"
         />
 
-
 </RelativeLayout>

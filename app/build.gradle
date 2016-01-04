@@ -35,8 +35,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.1.1'
 
     // Persistence
-    compile 'io.realm:realm-android:0.87.0'
-    compile 'com.github.thorbenprimke:realm-recyclerview:0.9.10'
+    compile 'io.realm:realm-android:0.87.1'
+    compile 'com.github.thorbenprimke:realm-recyclerview:0.9.12'
 
     // Dependency Injection
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -62,5 +62,14 @@ dependencies {
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
     // Support annotations
     androidTestCompile 'com.android.support:support-annotations:23.1.1'
+    // Espresso-contrib for DatePicker, RecyclerView, Drawer actions, Accessibility checks, CountingIdlingResource
+    androidTestCompile ('com.android.support.test.espresso:espresso-contrib:2.2.1') {
+        exclude module: 'support-annotations'
+        exclude module: 'support-v4'
+        exclude module: 'support-v13'
+        exclude module: 'recyclerview-v7'
+    }
+
+//    androidTestCompile 'com.github.donnfelker:RealmEspressoContrib:0.1.2'
 
 }
