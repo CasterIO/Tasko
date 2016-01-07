@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView;
 import io.realm.Realm;
 import io.realm.RealmAsyncTask;
+import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
 public class MainFragment extends Fragment {
@@ -27,6 +28,7 @@ public class MainFragment extends Fragment {
 
     private Realm realm;
 
+    private RealmChangeListener changeListener;
 
     public MainFragment() {
     }

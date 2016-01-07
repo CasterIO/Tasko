@@ -8,6 +8,15 @@
               android:orientation="vertical"
               tools:context="com.donnfelker.tasko.fragments.NewTaskFragment">
 
+    <TextView
+        android:id="@+id/new_task_task_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_action_list"
+        android:text="@string/create_a_task"
+        android:gravity="center_vertical"
+        android:textSize="21sp"/>
+
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/new_task_task_name_input_layout"

@@ -30,6 +30,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withTagKey;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static com.donnfelker.tasko.TaskoMatchers.withCompoundDrawable;
+import static com.donnfelker.tasko.TaskoMatchers.withImageDrawable;
+import static com.donnfelker.tasko.TaskoMatchers.withTaskViewName;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.instanceOf;
 
@@ -51,10 +54,21 @@ public class CreateNewTaskTest {
 
         onView(withText("Foo 1")).check(matches(isDisplayed()));
 
-        onView(withId(R.id.main_task_list)).perform(RecyclerViewActions.scrollToPosition(10));
-        onView(withText("Foo 10")).check(matches(isDisplayed()));
+        onView(withId(R.id.main_task_list)).perform(RealmRecyclerViewActions.scrollTo(withTaskViewName("Foo 10")));
 
     }
 
+    @Test
+    public void testNewTaskScreenShouldHaveCorrectListIcon() {
+        // Go to the new task screen
+        onView(withId(R.id.menu_main_new_task)).perform(click());
+
+        onView(withCompoundDrawable(R.drawable.ic_action_list)).check(matches(isDisplayed()));
+
+        // verify that the icon is present and correct
+        onView(withId(R.id.new_task_task_header))
+                .check(matches(withCompoundDrawable(R.drawable.ic_action_list)))
+                .check(matches(withText(R.string.create_a_task)));
+    }
 
 }
