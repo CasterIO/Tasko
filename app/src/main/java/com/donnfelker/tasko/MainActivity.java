@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,6 +17,8 @@ import com.donnfelker.tasko.fragments.NewTaskFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    private FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         //fab.setRippleColor(getResources().getColor(R.color.ripple_color));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +38,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Log.d("Test", "test");
+
+        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                int backStackCount = getSupportFragmentManager().getBackStackEntryCount();
+                if(backStackCount == 0) {
+                    fab.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         navigateToMainFragment();
 
@@ -75,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void navigateToNewTask() {
+        fab.setVisibility(View.GONE);
         NewTaskFragment f = NewTaskFragment.newInstance();
         getSupportFragmentManager()
                 .beginTransaction()
