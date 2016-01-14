@@ -329,7 +329,8 @@ public final class RealmRecyclerViewActions {
 
         @Override
         public void perform(UiController uiController, View root) {
-            RecyclerView recyclerView = (RecyclerView) root;
+            RealmRecyclerView realmRecyclerView = (RealmRecyclerView) root;
+            RecyclerView recyclerView = (RecyclerView) realmRecyclerView.findViewById(R.id.rrv_recycler_view);
             try {
                 scroller.perform(uiController, root);
                 uiController.loopMainThreadUntilIdle();
@@ -371,10 +372,12 @@ public final class RealmRecyclerViewActions {
 
         @Override
         public void perform(UiController uiController, View view) {
-            RecyclerView recyclerView = (RecyclerView) view;
+            RealmRecyclerView realmRecyclerView = (RealmRecyclerView) view;
+            RecyclerView recyclerView = (RecyclerView) realmRecyclerView.findViewById(R.id.rrv_recycler_view);
             new ScrollToPositionViewAction(position).perform(uiController, view);
             uiController.loopMainThreadUntilIdle();
             @SuppressWarnings("unchecked")
+
             VH viewHolderForPosition = (VH) recyclerView.findViewHolderForPosition(position);
             if (null == viewHolderForPosition) {
                 throw new PerformException.Builder().withActionDescription(this.toString())

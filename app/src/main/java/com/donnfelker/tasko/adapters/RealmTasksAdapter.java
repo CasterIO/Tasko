@@ -1,10 +1,8 @@
 package com.donnfelker.tasko.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.donnfelker.tasko.R;
@@ -18,14 +16,17 @@ import io.realm.RealmViewHolder;
 
 public class RealmTasksAdapter extends RealmBasedRecyclerViewAdapter<Task, RealmTasksAdapter.ViewHolder> {
 
-    public RealmTasksAdapter(Context context, RealmResults<Task> realmResults, boolean automaticUpdate, boolean animateResults) {
+    private ITaskItemClickListener clickListener;
+
+    public RealmTasksAdapter(Context context, RealmResults<Task> realmResults, boolean automaticUpdate, boolean animateResults, ITaskItemClickListener clickListener) {
         super(context, realmResults, automaticUpdate, animateResults);
+        this.clickListener = clickListener;
     }
 
     @Override
     public ViewHolder onCreateRealmViewHolder(ViewGroup viewGroup, int viewType) {
         View v = inflater.inflate(R.layout.task_item, viewGroup, false);
-        return new ViewHolder(v);
+        return new ViewHolder(v, clickListener);
     }
 
     @Override
@@ -34,13 +35,27 @@ public class RealmTasksAdapter extends RealmBasedRecyclerViewAdapter<Task, Realm
         viewHolder.taskName.setText(task.getName());
     }
 
-    class ViewHolder extends RealmViewHolder {
+    class ViewHolder extends RealmViewHolder implements View.OnClickListener {
 
         @Bind(R.id.task_item_task_name) public TextView taskName;
+        private ITaskItemClickListener clickListener;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view, ITaskItemClickListener clickListener) {
             super(view);
+            this.clickListener = clickListener;
             ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            if(clickListener != null) {
+                clickListener.onTaskClick(v, realmResults.get(getAdapterPosition()));
+            }
+        }
+    }
+
+    public static interface ITaskItemClickListener {
+        void onTaskClick(View caller, Task task);
     }
 }
