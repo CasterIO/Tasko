@@ -1,27 +1,36 @@
 package com.donnfelker.tasko;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.donnfelker.tasko.fragments.MainFragment;
 import com.donnfelker.tasko.fragments.NewTaskFragment;
 
+import javax.inject.Inject;
+
 public class MainActivity extends AppCompatActivity {
+
+    @Inject SharedPreferences prefs;
 
     private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ((TaskoApplication)getApplication()).getComponent().inject(this);
+        if(prefs != null) {
+            Log.d("Dagger2", "Prefs is not null");
+        }
+
         String id = getIntent().getStringExtra("person_id");
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
