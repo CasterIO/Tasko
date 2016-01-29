@@ -13,20 +13,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.donnfelker.tasko.R;
+import com.donnfelker.tasko.TaskoApplication;
 import com.donnfelker.tasko.adapters.RealmTasksAdapter;
+import com.donnfelker.tasko.http.ForecastListener;
+import com.donnfelker.tasko.http.ForecastService;
 import com.donnfelker.tasko.models.Task;
 
 import java.util.UUID;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView;
+import io.forecast.models.Forecast;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
 public class MainFragment extends Fragment {
 
+    @Inject ForecastService forecastService;
     @Bind(R.id.main_task_list) protected RealmRecyclerView rv;
 
     private Realm realm;
@@ -41,11 +48,29 @@ public class MainFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((TaskoApplication)(getActivity().getApplication())).getComponent().inject(this);
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
 
         realm = Realm.getDefaultInstance();
+
+        forecastService.getForecastFor("12.2", "1234.23", new ForecastListener() {
+            @Override
+            public void onForecastLoaded(Forecast forecast) {
+
+            }
+
+            @Override
+            public void onForecastFailed(Exception e) {
+
+            }
+        });
     }
 
     @Override

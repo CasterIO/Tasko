@@ -10,11 +10,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.donnfelker.tasko.fragments.MainFragment;
 import com.donnfelker.tasko.fragments.NewTaskFragment;
+import com.donnfelker.tasko.http.ForecastListener;
+import com.donnfelker.tasko.http.ForecastService;
 
 import javax.inject.Inject;
+
+import io.forecast.models.Forecast;
 
 public class MainActivity extends AppCompatActivity {
 

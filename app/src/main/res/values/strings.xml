@@ -13,4 +13,5 @@
     <string name="create_a_task">Create A Task</string>
     <string name="edit">Edit</string>
     <string name="save">Save</string>
+    <string name="forecast_io_api_key">8aefa5cf69cfeadcf01719c8bbf84d1b</string>
 </resources>

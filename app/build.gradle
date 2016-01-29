@@ -44,6 +44,8 @@ dependencies {
     apt 'com.google.dagger:dagger-compiler:2.0.2'
     provided 'javax.annotation:jsr250-api:1.0'
 
+    // API Tooling
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
 
     // Unit Tests
     testCompile 'junit:junit:4.12'
@@ -69,6 +71,7 @@ dependencies {
         exclude module: 'support-v13'
         exclude module: 'recyclerview-v7'
     }
+
 
 //    androidTestCompile 'com.github.donnfelker:RealmEspressoContrib:0.1.2'
 
