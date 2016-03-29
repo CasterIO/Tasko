@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -62,6 +63,7 @@ public class CurrentConditionService extends Service {
                     Realm realm = Realm.getDefaultInstance();
                     realm.beginTransaction();
                     Task task = realm.createObject(Task.class);
+                    task.setUuid(UUID.randomUUID().toString());
                     task.setName(String.format("%s Weather: %s", dateFormatter.format(Calendar.getInstance().getTime()), icon));
                     task.setDescription("Forecast.io said we're getting " + icon + ".");
                     realm.commitTransaction();
